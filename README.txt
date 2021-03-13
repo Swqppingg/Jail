@@ -2,7 +2,7 @@
 Standalone Jail Script
 
 # :hammer: Requirements
-[mythic_notify](https://github.com/FlawwsX/mythic_notify) - (OPTIONAL) - Notifications when in jail
+[mythic_notify](https://github.com/FlawwsX/mythic_notify) - (OPTIONAL) - For notifications when in jail
 
 # :hammer_and_wrench: Features
 - Ace Permissions (jail.commands)
