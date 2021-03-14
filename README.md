@@ -8,6 +8,12 @@ Standalone Jail Script
 - Ace Permissions (jail.commands)
 - Discord Logging
 
+# 💻Commands
+- /jail [Player ID] [Seconds] - Requires jail.commands ace permission
+- /unjail [Player ID] - Requires jail.commands ace permission
+- /jailme
+
+
 # :inbox_tray: Download
 [Download via Github](https://github.com/Swqppingg/Jail)
 
