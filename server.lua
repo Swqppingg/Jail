@@ -7,6 +7,23 @@ discordwebhooklink = "WEBHOOK_HERE" -- Change this to your discord webhook for l
 local jailtime = Config.defaultTime
 local maxtime = Config.maxTime
 
+function sendDiscord(name, message)
+	local content = {
+        {
+        	["color"] = '14561591',
+            ["author"] = {
+		        ["name"] = "".. name .."",
+		        ["icon_url"] = 'https://i.pinimg.com/originals/fe/a5/57/fea55780b562eb2032641d1867ee4098.png',
+		    },
+            ["description"] = message,
+            ["footer"] = {
+            ["text"] = "",
+            }
+        }
+    }
+  	PerformHttpRequest(discordwebhooklink, function(err, text, headers) end, 'POST', json.encode({username = name, embeds = content}), { ['Content-Type'] = 'application/json' })
+end
+
 RegisterCommand("jailme", function(source, args, raw)
 	if #args <= 0 then
 		TriggerClientEvent('chatMessage', source, "Use the following format:", {255, 0, 0}, "/jailme [Seconds]")
@@ -19,7 +36,7 @@ RegisterCommand("jailme", function(source, args, raw)
 	TriggerClientEvent("Jail:JailPlayer", source, jailtime)
 	TriggerClientEvent('chatMessage', -1, 'JUDGE', { 54, 86, 245 }, GetPlayerName(source) ..' was jailed for '.. jailtime ..' months')
 	local steam = GetPlayerName(source)
-	PerformHttpRequest(discordwebhooklink, function(err, text, headers) end, 'POST', json.encode({username = steam, content = "**User Jailed:** ".. steam .."\n**Time:** ".. jailtime .. " seconds \n**Jailed By:** ".. steam .." ", avatar_url = DISCORD_IMAGE}), { ['Content-Type'] = 'application/json' })
+	sendDiscord("User Jailed (/jailme)", "**User:** ".. steam .."\n**Time:** ".. jailtime .." seconds\n**Jailed by:** ".. steam .."")
 end
 end, false)
 
@@ -34,7 +51,7 @@ RegisterCommand("unjail", function(source, args, raw)
         TriggerClientEvent("Jail:UnjailPlayer", jpid)
 		local steam = GetPlayerName(source)
 		local jplayer = GetPlayerName(jpid)
-		PerformHttpRequest(discordwebhooklink, function(err, text, headers) end, 'POST', json.encode({username = steam, content = "**User Unjailed:** ".. jplayer .."\n**Unjailed By:** ".. steam .." ", avatar_url = DISCORD_IMAGE}), { ['Content-Type'] = 'application/json' })
+		sendDiscord("User Unjailed (/unjail)", "**User:** ".. steam .."\n**Unjailed by:** ".. steam .."")
 	end
 end
 else
@@ -60,7 +77,7 @@ RegisterCommand("jail", function(source, args, raw)
 		TriggerClientEvent('chatMessage', -1, 'JUDGE', { 54, 86, 245 }, GetPlayerName(jpid) ..' jailed for '.. jailtime ..' secs')
 		local steam = GetPlayerName(source)
 		local jplayer = GetPlayerName(jpid)
-		PerformHttpRequest(discordwebhooklink, function(err, text, headers) end, 'POST', json.encode({username = steam, content = "**User Jailed:** ".. jplayer .."\n**Time:** ".. jailtime .. " seconds \n**Jailed By:** ".. steam .." ", avatar_url = DISCORD_IMAGE}), { ['Content-Type'] = 'application/json' })
+		sendDiscord("User Jailed (/jail)", "**User:** ".. jplayer .."\n**Time:** ".. jailtime .." seconds\n**Jailed by:** ".. steam .."")
 	end
 end
 else
@@ -77,7 +94,7 @@ versionChecker = true -- Set to false to disable version checker
 
 -- Don't touch
 resourcename = "Jail"
-version = "1.0.0"
+version = "1.0.1"
 rawVersionLink = "https://raw.githubusercontent.com/Swqppingg/Jail/main/version.txt"
 
 

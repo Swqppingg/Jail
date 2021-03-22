@@ -6,11 +6,11 @@ Citizen.CreateThread(function()
 		{ name="Seconds", help="Seconds" }
 	})
 	TriggerEvent('chat:addSuggestion', '/jail', 'Jail another player', {
-		{ name="Player ID", help="player id" },
+		{ name="Player ID", help="Player ID" },
 		{ name="Seconds", help="seconds" }
 	})
 	TriggerEvent('chat:addSuggestion', '/unjail', 'Unjail another player', {
-		{ name="Player ID", help="player id" }
+		{ name="Player ID", help="Player ID" }
 	})
 end)
 
